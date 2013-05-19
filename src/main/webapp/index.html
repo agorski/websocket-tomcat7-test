@@ -1,0 +1,60 @@
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="de"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="de"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="de"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="de"> <!--<![endif]-->
+<head>
+  <title>EFI asynchrone Angebotsermittlung</title>
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+  <link rel="stylesheet" href="stylesheets/general_foundicons_ie7.css">
+  <link rel="stylesheet" href="stylesheets/general_foundicons.css">
+  <script src="javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+<noscript>
+  <h2 style="color: #ff0000">Ihre Browser unterstützt keine Websockets! Nutze Chrome oder Safari.</h2>
+</noscript>
+
+<div class="twelve columns">
+  <span id="status-polaczony" class="visually-hidden label success" style="width: 150px">Weboscket : polaczenie nawiazane</span>
+  <span id="status-rozlaczony" class="label alert" style="width: 150px">Websocket : brak polaczenia</span>
+</div>
+<div class="twelve columns">
+  <h2>Komunikacja z serwerem Tomcat poprzez Websocket</h2>
+
+  <p class="subheader">Kliknij przycisk <span class="label success">Wyslij dane</span> aby nawiazac polaczenie z
+    serwerem poprzez Websocket.</br>Server bedzie odpowiadal asynchronicznie (10 wiadomosci), a na koncu zamknie
+    polaczenie.<br/>
+    Stan polaczenia widoczny jest w lewym, gornym rogu.</p>
+
+  <form>
+    <label>Pierwszy parameter</label>
+    <input id="input-pierwszy" type="text" placeholder="podaj pierwsza wartosc">
+
+    <label>Drugi parametr</label>
+    <input id="input-drugi" type="text" class="twelve" placeholder="podaj druga wartosc"/>
+
+    <a id="button-wyslij" class="button" onclick="wyslijDane();">Wyslij dane</a>
+  </form>
+</div>
+<div id="przegladarkaBezWebsocket" class="reveal-modal large">
+  <h2>Twoja przegladarka nie wspiera Websocket!</h2>
+
+  <p class="lead">Przegladarki, ktore wspieraja Websocket i ich minimalne wersje</p>
+
+  <p>Chrome 14, Firefox 6, Safari 6, IE 10, Opera 12.1</p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="konsola" class="twelve columns"></div>
+
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/foundation.min.js"></script>
+<script src="javascripts/app.js"></script>
+<script src="javascripts/app-websocket.js" charset="UTF-8" type="text/javascript"></script>
+</body>
+</html>
