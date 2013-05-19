@@ -16,45 +16,25 @@ import java.util.Random;
 public class WebsocketServlet extends WebSocketServlet {
 
   private static final long serialVersionUID = 1L;
-  private volatile int byteBufSize;
-  private volatile int charBufSize;
 
   @Override
   public void init() throws ServletException {
     super.init();
-    byteBufSize = getInitParameterIntValue("byteBufferMaxSize", 2097152);
-    charBufSize = getInitParameterIntValue("charBufferMaxSize", 2097152);
-  }
-
-  public int getInitParameterIntValue(String name, int defaultValue) {
-    String val = this.getInitParameter(name);
-    int result;
-    if (null != val) {
-      try {
-        result = Integer.parseInt(val);
-      } catch (Exception x) {
-        result = defaultValue;
-      }
-    } else {
-      result = defaultValue;
-    }
-
-    return result;
   }
 
 
   @Override
   protected StreamInbound createWebSocketInbound(String subProtocol,
                                                  HttpServletRequest request) {
-    return new EchoMessageInbound(byteBufSize, charBufSize);
+    return new TestowyMessageInbound();
   }
 
-  private static final class EchoMessageInbound extends MessageInbound {
+  private static final class TestowyMessageInbound extends MessageInbound {
 
-    public EchoMessageInbound(int byteBufferMaxSize, int charBufferMaxSize) {
+    public TestowyMessageInbound() {
       super();
-      setByteBufferMaxSize(byteBufferMaxSize);
-      setCharBufferMaxSize(charBufferMaxSize);
+      setByteBufferMaxSize(2097152);
+      setCharBufferMaxSize(2097152);
     }
 
     @Override
@@ -64,7 +44,6 @@ public class WebsocketServlet extends WebSocketServlet {
 
     @Override
     protected void onTextMessage(CharBuffer message) throws IOException {
-//      message.toString()
       DaneDto zapytanieKlienta = konwertujDaneZapytania(message.toString());
       Random r = new Random();
       for (int i = 1; i < 11; i++) {
